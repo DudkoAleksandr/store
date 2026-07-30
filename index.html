@@ -1,19 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
     <form action="">
-        <input class="input__search" type="text" placeholder="Поиск..."><br>
-        <div class="input__range">
-        <span class="range__min"></span><input class="range__price" type="range"><span class="range__max"></span>
-        </div>
+      <input class="input__search" type="text" placeholder="Поиск..." />
+      <select class="select__sort" name="" id="">
+        <option value="default" selected>По умолчанию</option>
+        <option value="price-up">По цене ↑</option>
+        <option value="price-down">По цене ↓</option>
+        <option value="rating">По рейтингу</option>
+      </select>
+      <div class="input__range">
+        <span class="range__min"></span
+        ><input class="range__price" type="range" /><span
+          class="range__max"
+        ></span>
+      </div>
     </form>
+    <a href="./basket.html">Корзина</a>
     <div class="cards"></div>
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>

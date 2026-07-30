@@ -3,6 +3,7 @@ const inputSearch = document.querySelector(".input__search");
 const rangePrice = document.querySelector(".range__price");
 const rangeMin = document.querySelector(".range__min");
 const rangeMax = document.querySelector(".range__max");
+const selectSort = document.querySelector(".select__sort");
 
 const products = [
   {
@@ -177,3 +178,26 @@ rangePrice.addEventListener("change", () => {
   }
   render(priceCard);
 });
+
+selectSort.addEventListener("change", () => {
+  if (selectSort.value === "price-up") {
+    sortMin();
+    render(products);
+  } else if (selectSort.value === "price-down") {
+    sortMax();
+    render(products);
+  } else if (selectSort.value === "rating") {
+    sortRating();
+    render(products)
+  }
+});
+
+function sortMin() {
+  products.sort((a, b) => a.price - b.price);
+}
+function sortMax() {
+  products.sort((a, b) => b.price - a.price);
+}
+function sortRating(){
+  products.sort((a, b) => a.rating - b.rating)
+}
