@@ -4,6 +4,7 @@ const rangePrice = document.querySelector(".range__price");
 const rangeMin = document.querySelector(".range__min");
 const rangeMax = document.querySelector(".range__max");
 const selectSort = document.querySelector(".select__sort");
+const rangeResult = document.querySelector(".range__resualt");
 
 const products = [
   {
@@ -116,6 +117,8 @@ const products = [
   },
 ];
 
+const basket = [];
+
 function render(products) {
   card.innerHTML = "";
   for (let product of products) {
@@ -127,11 +130,21 @@ function render(products) {
     <h1 class="card__title">${product.title}</h1>
     <p class="card__price">Цена: ${product.price}</p>
     <p class="card__rating">Рейтинг: ${product.rating}</p>
-    <button class="card__btn">Добавить в корзину</button>
+    <button id = "${product.id}" class="card__btn">Добавить в корзину</button>
     </div>
 `;
     card.insertAdjacentHTML("beforeend", html);
   }
+  const btnBasket = document.querySelectorAll(".card__btn");
+  btnBasket.forEach((buttonAdd) => {
+    buttonAdd.addEventListener("click", () => {
+      let findProduct = products.find((product) => {
+        return product.id === Number(buttonAdd.id)
+      });
+      basket.push(findProduct)
+      console.log(basket);
+    });
+  });
 }
 render(products);
 
@@ -166,10 +179,13 @@ function price() {
   rangeMax.innerHTML = priceMax;
   rangePrice.min = priceMin;
   rangePrice.max = priceMax;
+  rangePrice.value = rangePrice.max;
+  rangeResult.innerHTML = rangePrice.value;
 }
 price();
 
 rangePrice.addEventListener("change", () => {
+  rangeResult.innerHTML = rangePrice.value;
   const priceCard = [];
   for (let productPrice of products) {
     if (rangePrice.value >= productPrice.price) {
@@ -188,7 +204,7 @@ selectSort.addEventListener("change", () => {
     render(products);
   } else if (selectSort.value === "rating") {
     sortRating();
-    render(products)
+    render(products);
   }
 });
 
@@ -198,6 +214,6 @@ function sortMin() {
 function sortMax() {
   products.sort((a, b) => b.price - a.price);
 }
-function sortRating(){
-  products.sort((a, b) => a.rating - b.rating)
+function sortRating() {
+  products.sort((a, b) => a.rating - b.rating);
 }

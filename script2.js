@@ -109,8 +109,13 @@ const products = [
   },
 ];
 
-const prices = products.map((product) => {
-console.log(product)
-return product.price 
-})
-console.log(prices)
+// const prices = products.map((product) => {
+// console.log(product)
+// return product.price 
+// })
+// console.log(prices)
+
+const num = [1, 4, 7, 2, 0, 5]
+let copynum = [...num]
+copynum.sort((a, b) => a - b)
+console.log(copynum, num)
