@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-a{
+a {
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -34,11 +34,11 @@ a{
   padding: 20px;
   border-radius: 5px;
 }
-.card__img-wrapper{
+.card__img-wrapper {
   display: flex;
   justify-content: center;
 }
-.card__img{
+.card__img {
   width: 200px;
   height: 200px;
 }
@@ -54,4 +54,41 @@ a{
   border: none;
   color: white;
   border-radius: 5px;
+}
+
+.basket__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.card__basket {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.card__basket-text {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.card__basket-img {
+  width: 100px;
+}
+.btn__count {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.btn__count-min,
+.btn__count-plus {
+  padding: 10px;
+  cursor: pointer;
+}
+.btn__basket-del {
+  padding: 5px;
+  cursor: pointer;
 }

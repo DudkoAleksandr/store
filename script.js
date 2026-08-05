@@ -117,7 +117,7 @@ const products = [
   },
 ];
 
-const basket = [];
+const basket = JSON.parse(localStorage.getItem("productsBasket")) || [];
 
 function render(products) {
   card.innerHTML = "";
@@ -139,9 +139,18 @@ function render(products) {
   btnBasket.forEach((buttonAdd) => {
     buttonAdd.addEventListener("click", () => {
       let findProduct = products.find((product) => {
-        return product.id === Number(buttonAdd.id)
+        return product.id === Number(buttonAdd.id);
       });
-      basket.push(findProduct)
+      const findIndex = basket.findIndex((element) => {
+        return findProduct.id === element.id;
+      });
+      if (basket[findIndex]) {
+        basket[findIndex].count++;
+      } else {
+        findProduct.count = 1;
+        basket.push(findProduct);
+      }
+      localStorage.setItem("productsBasket", JSON.stringify(basket));
       console.log(basket);
     });
   });
@@ -198,22 +207,25 @@ rangePrice.addEventListener("change", () => {
 selectSort.addEventListener("change", () => {
   if (selectSort.value === "price-up") {
     sortMin();
-    render(products);
+    render(sortProducts);
   } else if (selectSort.value === "price-down") {
     sortMax();
-    render(products);
+    render(sortProducts);
   } else if (selectSort.value === "rating") {
     sortRating();
+    render(sortProducts);
+  } else {
     render(products);
   }
 });
+const sortProducts = [...products];
 
 function sortMin() {
-  products.sort((a, b) => a.price - b.price);
+  sortProducts.sort((a, b) => a.price - b.price);
 }
 function sortMax() {
-  products.sort((a, b) => b.price - a.price);
+  sortProducts.sort((a, b) => b.price - a.price);
 }
 function sortRating() {
-  products.sort((a, b) => a.rating - b.rating);
+  sortProducts.sort((a, b) => a.rating - b.rating);
 }

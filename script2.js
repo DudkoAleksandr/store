@@ -93,6 +93,7 @@ const products = [
     stock: 17,
     color: "Черный",
     sale: true,
+    count: 1,
     image: "images/watch.jpg",
   },
   {
@@ -111,11 +112,36 @@ const products = [
 
 // const prices = products.map((product) => {
 // console.log(product)
-// return product.price 
+// return product.price
 // })
 // console.log(prices)
 
 const num = [1, 4, 7, 2, 0, 5]
-let copynum = [...num]
-copynum.sort((a, b) => a - b)
-console.log(copynum, num)
+// let copynum = [...num]
+// copynum.sort((a, b) => a - b)
+// console.log(copynum, num)
+
+const card = {
+  id: 8,
+  title: "Умные часы Xiaomi Watch S3",
+  category: "Часы",
+  brand: "Xiaomi",
+  price: 15990,
+  rating: 4.4,
+  stock: 17,
+  color: "Черный",
+  sale: true,
+  image: "images/watch.jpg",
+};
+// console.log(num.includes(7))
+const index = products.findIndex((cards) => {
+ return cards.id === card.id
+})
+console.log(index)
+if(products[index]){
+  products[index].count++;
+  console.log('Продукт есть')
+} else {
+  console.log('продукта нет')
+}
+console.log(products)
