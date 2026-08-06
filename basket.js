@@ -6,6 +6,7 @@ console.log(products);
 function render(products) {
   basketCards.innerHTML = "";
   for (let product of products) {
+    let price = product.count * product.price;
     const html = `
         <div class="card__basket">
         <img class="card__basket-img" src="${product.image}" alt="">
@@ -15,17 +16,38 @@ function render(products) {
         <button id="${product.id}" class="btn__count-min">-</button><p class="card__basket-count">${product.count}</p><button id="${product.id}" class="btn__count-plus">+</button>
         </div>
         </div>
-        <p>${product.price}</p>
-        <button class="btn__basket-del">Удалить</button>
+        <p>${price}</p>
+        <button id="${product.id}" class="btn__basket-del">Удалить</button>
     </div>
     `;
     basketCards.insertAdjacentHTML("beforeend", html);
   }
+
   const btnsCountMin = document.querySelectorAll(".btn__count-min");
-  btnsCountMin.forEach((btnCountMin, index) => {
-      if (products[index].count <= 1) {
-        btnCountMin.disabled = true
+  // btnsCountMin.forEach((btnCountMin, index) => {
+  //   if (products[index].count <= 1) {
+  //     btnCountMin.disabled = true;
+  //   }
+  // });
+
+  btnsCountMin.forEach((btnCountMin) => {
+    for (let product of products) {
+      if (product.id === Number(btnCountMin.id)) {
+        if (product.count <= 1) {
+          btnCountMin.disabled = true;
+        }
       }
+    }
+  });
+
+  const btnsDelBasket = document.querySelectorAll(".btn__basket-del");
+  btnsDelBasket.forEach((btnDelBasket) => {
+    btnDelBasket.addEventListener("click", () => {
+      let newProducts = products.filter(
+        (product) => product.id !== Number(btnDelBasket.id),
+      );
+      render(newProducts);
+    });
   });
 }
 render(products);
