@@ -20,6 +20,13 @@ a {
   margin-left: 10px;
 }
 
+.range__card{
+  position: relative;
+}
+.range__resualt{
+  position: absolute;
+}
+
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

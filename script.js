@@ -202,6 +202,11 @@ rangePrice.addEventListener("change", () => {
     }
   }
   render(priceCard);
+  // if (rangePrice.value === "67990") {
+  //   rangeResult.style.left = "75%";
+  // } 
+  rangeResult.style.left = (rangePrice.value * 100) / rangePrice.max;
+  console.log(rangePrice.value, rangePrice.value * 100 / rangePrice.max);
 });
 
 selectSort.addEventListener("change", () => {
