@@ -1,4 +1,5 @@
 const basketCards = document.querySelector(".basket__cards");
+const basketPrice = document.querySelector(".basket__price");
 
 let products = JSON.parse(localStorage.getItem("productsBasket")) || [];
 console.log(products);
@@ -22,7 +23,6 @@ function render(products) {
     `;
     basketCards.insertAdjacentHTML("beforeend", html);
   }
-
   // const btnsCountMin = document.querySelectorAll(".btn__count-min");
   // // btnsCountMin.forEach((btnCountMin, index) => {
   // //   if (products[index].count <= 1) {
@@ -39,7 +39,6 @@ function render(products) {
   //     }
   //   }
   // });
-
 }
 render(products);
 
@@ -48,13 +47,35 @@ basketCards.addEventListener("click", (event) => {
     let newProducts = products.filter(
       (product) => product.id !== Number(event.target.id),
     );
-    products = [...newProducts]
+    products = [...newProducts];
     render(products);
     localStorage.setItem("productsBasket", JSON.stringify(products));
-    console.log(newProducts, event.target)
+    console.log(newProducts, event.target);
   } else if (event.target.classList.contains("btn__count-plus")) {
-    console.log("+");
+    const productPlus = products.find(
+      (product) => product.id === Number(event.target.id),
+    );
+    productPlus.count++;
+    render(products);
   } else if (event.target.classList.contains("btn__count-min")) {
-    console.log("-");
+    const productMin = products.find(
+      (product) => product.id === Number(event.target.id),
+    );
+    productMin.count--;
+    render(products);
   }
+  finishPrice();
 });
+
+function finishPrice() {
+  let priceFinis = 0;
+  for (let product of products) {
+    priceFinis = priceFinis + product.price * product.count;
+  }
+  if (priceFinis > 0) {
+    basketPrice.innerHTML = `Сумма: ${priceFinis}`;
+  } else if (priceFinis <= 0) {
+    basketPrice.innerHTML = "Корзина пустая";
+  }
+}
+finishPrice();

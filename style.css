@@ -25,6 +25,7 @@ a {
 }
 .range__resualt{
   position: absolute;
+  transform: translateX(-50%);
 }
 
 .cards {
@@ -63,6 +64,12 @@ a {
   border-radius: 5px;
 }
 
+.basket__wrap{
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
 .basket__cards {
   display: flex;
   flex-direction: column;
@@ -98,4 +105,9 @@ a {
 .btn__basket-del {
   padding: 5px;
   cursor: pointer;
+}
+
+.basket__price{
+  margin-top: 100px;
+  text-align: right;
 }

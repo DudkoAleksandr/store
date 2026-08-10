@@ -193,7 +193,7 @@ function price() {
 }
 price();
 
-rangePrice.addEventListener("change", () => {
+rangePrice.addEventListener("input", () => {
   rangeResult.innerHTML = rangePrice.value;
   const priceCard = [];
   for (let productPrice of products) {
@@ -205,8 +205,7 @@ rangePrice.addEventListener("change", () => {
   // if (rangePrice.value === "67990") {
   //   rangeResult.style.left = "75%";
   // } 
-  rangeResult.style.left = (rangePrice.value * 100) / rangePrice.max;
-  console.log(rangePrice.value, rangePrice.value * 100 / rangePrice.max);
+  rangeResult.style.left = (rangePrice.value * 100) / rangePrice.max + '%';
 });
 
 selectSort.addEventListener("change", () => {
