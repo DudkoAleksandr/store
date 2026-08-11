@@ -5,117 +5,9 @@ const rangeMin = document.querySelector(".range__min");
 const rangeMax = document.querySelector(".range__max");
 const selectSort = document.querySelector(".select__sort");
 const rangeResult = document.querySelector(".range__resualt");
+const inputSale = document.querySelector("#check");
 
-const products = [
-  {
-    id: 1,
-    title: "Ноутбук Lenovo IdeaPad",
-    category: "Ноутбуки",
-    brand: "Lenovo",
-    price: 54990,
-    rating: 4.7,
-    stock: 8,
-    color: "Серый",
-    sale: true,
-    image: "img/LenovoIdeaPad.webp",
-  },
-  {
-    id: 2,
-    title: "Смартфон Samsung Galaxy A56",
-    category: "Смартфоны",
-    brand: "Samsung",
-    price: 31990,
-    rating: 4.8,
-    stock: 15,
-    color: "Черный",
-    sale: false,
-    image: "img/SamsungGalaxyA56.webp",
-  },
-  {
-    id: 3,
-    title: "Наушники JBL Tune 720BT",
-    category: "Наушники",
-    brand: "JBL",
-    price: 6990,
-    rating: 4.5,
-    stock: 22,
-    color: "Синий",
-    sale: true,
-    image: "img/JBLTune720BT.webp",
-  },
-  {
-    id: 4,
-    title: "Монитор LG UltraWide",
-    category: "Мониторы",
-    brand: "LG",
-    price: 24990,
-    rating: 4.9,
-    stock: 5,
-    color: "Черный",
-    sale: false,
-    image: "img/LGUltraWide.webp",
-  },
-  {
-    id: 5,
-    title: "Клавиатура Logitech MX Keys",
-    category: "Клавиатуры",
-    brand: "Logitech",
-    price: 9990,
-    rating: 4.8,
-    stock: 11,
-    color: "Черный",
-    sale: true,
-    image: "img/LogitechMXKeys.webp",
-  },
-  {
-    id: 6,
-    title: "Мышь Logitech G304",
-    category: "Мыши",
-    brand: "Logitech",
-    price: 4290,
-    rating: 4.6,
-    stock: 20,
-    color: "Белый",
-    sale: false,
-    image: "img/LogitechG304.webp",
-  },
-  {
-    id: 7,
-    title: "Планшет Apple iPad Air",
-    category: "Планшеты",
-    brand: "Apple",
-    price: 67990,
-    rating: 4.9,
-    stock: 4,
-    color: "Синий",
-    sale: false,
-    image: "img/AppleiPadAir.webp",
-  },
-  {
-    id: 8,
-    title: "Умные часы Xiaomi Watch S3",
-    category: "Часы",
-    brand: "Xiaomi",
-    price: 15990,
-    rating: 4.4,
-    stock: 17,
-    color: "Черный",
-    sale: true,
-    image: "img/XiaomiWatchS3.webp",
-  },
-  {
-    id: 9,
-    title: "Колонка JBL Flip 6",
-    category: "Колонки",
-    brand: "JBL",
-    price: 10990,
-    rating: 4.8,
-    stock: 9,
-    color: "Красный",
-    sale: false,
-    image: "img/JBLFlip6.webp",
-  },
-];
+import { products } from "./data.js";
 
 const basket = JSON.parse(localStorage.getItem("productsBasket")) || [];
 
@@ -202,10 +94,7 @@ rangePrice.addEventListener("input", () => {
     }
   }
   render(priceCard);
-  // if (rangePrice.value === "67990") {
-  //   rangeResult.style.left = "75%";
-  // } 
-  rangeResult.style.left = (rangePrice.value * 100) / rangePrice.max + '%';
+  rangeResult.style.left = (rangePrice.value * 100) / rangePrice.max + "%";
 });
 
 selectSort.addEventListener("change", () => {
@@ -233,3 +122,16 @@ function sortMax() {
 function sortRating() {
   sortProducts.sort((a, b) => a.rating - b.rating);
 }
+
+inputSale.addEventListener("change", () => {
+  const productsSale = products.filter((el) => {
+    if (el.sale === true) {
+      return el;
+    }
+  });
+  if (inputSale.checked === true) {
+    console.log(productsSale);
+  } else {
+    console.log(products)
+  }
+});
