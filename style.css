@@ -9,24 +9,71 @@ a {
   cursor: pointer;
 }
 
+.btn__filter {
+  margin: 10px;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+.btn__filter:hover {
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(168, 170, 172);
+}
+
+.filter {
+  max-height: 200px;
+  overflow: hidden;
+  opacity: 1;
+  transition:
+    max-height 0.8s ease,
+    opacity 0.6s ease;
+}
+
+.filter__none {
+  max-height: 0;
+  opacity: 0;
+}
+
+.filter__form {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.input__search {
+  width: 200px;
+  margin-top: 10px;
+}
+.select__sort {
+  width: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 .input__range {
   display: flex;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.range__min,
+
 .range__max {
   margin-right: 10px;
   margin-left: 10px;
 }
+.range__min {
+  margin-right: 10px;
+}
 
-.range__card{
+.range__card {
   position: relative;
 }
-.range__resualt{
+.range__resualt {
   position: absolute;
   transform: translateX(-50%);
   left: 100%;
+}
+.checkbox__text {
+  margin-left: 10px;
 }
 
 .cards {
@@ -65,10 +112,13 @@ a {
   border-radius: 5px;
 }
 
-.basket__wrap{
+.basket__wrap {
   display: flex;
   flex-direction: column;
   width: 600px;
+  border: 1px solid gray;
+  padding: 20px;
+  margin-left: 10px;
 }
 
 .basket__cards {
@@ -76,6 +126,7 @@ a {
   flex-direction: column;
   gap: 30px;
   margin-top: 30px;
+  margin-left: 10px;
 }
 
 .card__basket {
@@ -93,6 +144,9 @@ a {
 .card__basket-img {
   width: 100px;
 }
+.card__basket-sum{
+  width: 100px;
+}
 .btn__count {
   display: flex;
   gap: 10px;
@@ -108,7 +162,7 @@ a {
   cursor: pointer;
 }
 
-.basket__price{
+.basket__price {
   margin-top: 100px;
   text-align: right;
 }

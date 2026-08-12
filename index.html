@@ -7,31 +7,36 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <form action="">
-      <input class="input__search" type="text" placeholder="Поиск..." />
-      <select class="select__sort" name="" id="">
-        <option value="default" selected>По умолчанию</option>
-        <option value="price-up">По цене ↑</option>
-        <option value="price-down">По цене ↓</option>
-        <option value="rating">По рейтингу</option>
-      </select>
-      <div class="checkbox">
-        <input id="check" type="checkbox" /><label for="check"
-          >Показать товары со скидкой</label
-        >
-      </div>
-      <div class="input__range">
-        <span class="range__min"></span>
-        <div class="range__card">
-          <div>
-            <input class="range__price" type="range" />
-          </div>
-          <span class="range__resualt"></span>
+    <button class="btn__filter">Фильтр</button>
+    <a href="./basket.html"><button class="btn__filter">Корзина</button></a>
+    <div class="filter filter__none">
+      <form class="filter__form" action="">
+        <input class="input__search" type="text" placeholder="Поиск..." />
+        <select class="select__sort" name="" id="">
+          <option value="default" selected>По умолчанию</option>
+          <option value="price-up">По цене ↑</option>
+          <option value="price-down">По цене ↓</option>
+          <option value="rating">По рейтингу</option>
+        </select>
+        <div class="checkbox">
+          <input id="check" type="checkbox" /><label
+            class="checkbox__text"
+            for="check"
+            >Показать товары со скидкой</label
+          >
         </div>
-        <span class="range__max"></span>
-      </div>
-    </form>
-    <a href="./basket.html">Корзина</a>
+        <div class="input__range">
+          <span class="range__min"></span>
+          <div class="range__card">
+            <div>
+              <input class="range__price" type="range" />
+            </div>
+            <span class="range__resualt"></span>
+          </div>
+          <span class="range__max"></span>
+        </div>
+      </form>
+    </div>
     <div class="cards"></div>
     <script type="module" src="./script.js"></script>
   </body>

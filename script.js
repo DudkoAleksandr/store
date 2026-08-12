@@ -6,6 +6,8 @@ const rangeMax = document.querySelector(".range__max");
 const selectSort = document.querySelector(".select__sort");
 const rangeResult = document.querySelector(".range__resualt");
 const inputSale = document.querySelector("#check");
+const btnFilter = document.querySelector(".btn__filter");
+const filterWrap = document.querySelector(".filter");
 
 import { products } from "./data.js";
 
@@ -130,8 +132,17 @@ inputSale.addEventListener("change", () => {
     }
   });
   if (inputSale.checked === true) {
-    console.log(productsSale);
+    render(productsSale)
   } else {
-    console.log(products)
+    render(products)
   }
 });
+
+btnFilter.addEventListener('click', () => {
+filterWrap.classList.toggle('filter__none')
+if(filterWrap.classList.contains('filter__none')){
+  btnFilter.innerHTML = 'Фильтр'
+} else {
+  btnFilter.innerHTML = 'Закрыть фильтр'
+}
+})

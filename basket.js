@@ -17,7 +17,7 @@ function render(products) {
         <button id="${product.id}" class="btn__count-min">-</button><p class="card__basket-count">${product.count}</p><button id="${product.id}" class="btn__count-plus">+</button>
         </div>
         </div>
-        <p>${price}</p>
+        <p class="card__basket-sum">${price}</p>
         <button id="${product.id}" class="btn__basket-del">Удалить</button>
     </div>
     `;
