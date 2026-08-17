@@ -21,7 +21,7 @@ a {
 }
 
 .filter {
-  max-height: 200px;
+  max-height: 350px;
   overflow: hidden;
   opacity: 1;
   transition:
@@ -45,7 +45,14 @@ a {
   width: 200px;
   margin-top: 10px;
 }
-.select__sort {
+.checkbox__search-brand{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.select__sort, 
+.select__sort-brand {
   width: 200px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -105,6 +112,21 @@ a {
   border: none;
   margin-top: auto;
 }
+.card__btn-basket{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.card__btn-basket-plus,
+.card__btn-basket-min{
+  width: 30px;
+  padding: 5px;
+}
+.hidden{
+  display: none;
+}
+
 .card__btn:hover {
   background-color: black;
   border: none;

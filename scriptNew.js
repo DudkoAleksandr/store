@@ -8,6 +8,9 @@ const rangeResult = document.querySelector(".range__resualt");
 const inputSale = document.querySelector("#check");
 const btnFilter = document.querySelector(".btn__filter");
 const filterWrap = document.querySelector(".filter");
+const checkboxBrand = document.querySelectorAll(
+  ".checkbox__search-brand input",
+);
 
 import { products } from "./data.js";
 
@@ -25,6 +28,9 @@ function render(products) {
     <p class="card__price">Цена: ${product.price}</p>
     <p class="card__rating">Рейтинг: ${product.rating}</p>
     <button id = "${product.id}" class="card__btn">Добавить в корзину</button>
+    <div class="card__btn-basket hidden">
+    <button class="card__btn-basket-plus">+</button><p>0</p><button class="card__btn-basket-min">-</button>
+    </div>
     </div>
 `;
     card.insertAdjacentHTML("beforeend", html);
@@ -32,6 +38,9 @@ function render(products) {
   const btnBasket = document.querySelectorAll(".card__btn");
   btnBasket.forEach((buttonAdd) => {
     buttonAdd.addEventListener("click", () => {
+      const btnBlock = document.querySelector(".card__btn-basket");
+      btnBlock.classList.remove('hidden')
+      buttonAdd.innerHTML = 'Товар в корзине'
       let findProduct = products.find((product) => {
         return product.id === Number(buttonAdd.id);
       });
@@ -45,7 +54,7 @@ function render(products) {
         basket.push(findProduct);
       }
       localStorage.setItem("productsBasket", JSON.stringify(basket));
-      console.log(basket);
+      
     });
   });
 }
@@ -90,6 +99,10 @@ selectSort.addEventListener("change", () => {
   filterProducts();
 });
 
+// selectBrand.addEventListener("change", () => {
+//   filterProducts();
+// });
+
 inputSale.addEventListener("change", () => {
   filterProducts();
 });
@@ -112,6 +125,10 @@ function filterProducts() {
       .includes(inputSearch.value.toLowerCase());
   });
 
+  // newProducts = newProducts.filter((product) => {
+  //   return product.brand.toLowerCase() === selectBrand.value;
+  // });
+
   if (inputSale.checked === true) {
     newProducts = newProducts.filter((el) => {
       return el.sale === true;
@@ -132,3 +149,14 @@ function filterProducts() {
 
   render(newProducts);
 }
+
+checkboxBrand.forEach((checkbox) => {
+  checkbox.addEventListener('change', () => {
+    let newProducts = [...products]
+    newProducts = newProducts.filter((product) => {
+      return product.brand === checkbox.value
+    })
+    console.log(newProducts)
+    console.log(checkbox.value)
+  })
+})

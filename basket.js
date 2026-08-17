@@ -48,18 +48,25 @@ basketCards.addEventListener("click", (event) => {
       (product) => product.id !== Number(event.target.id),
     );
     products = [...newProducts];
+    
   } else if (event.target.classList.contains("btn__count-plus")) {
     const productPlus = products.find(
       (product) => product.id === Number(event.target.id),
     );
-    productPlus.count++;
+    if (productPlus.count < productPlus.stock) {
+      productPlus.count++;
+    } else if (productPlus.count >= productPlus.stock) {
+      // event.target.disabled = true;
+      alert('Товар закончился')
+    }
+
   } else if (event.target.classList.contains("btn__count-min")) {
     const productMin = products.find(
       (product) => product.id === Number(event.target.id),
     );
     productMin.count--;
   }
-  changeBasket()
+  changeBasket();
 });
 
 function changeBasket() {
