@@ -15,7 +15,7 @@ const checkboxBrand = document.querySelectorAll(
 import { products } from "./data.js";
 
 const basket = JSON.parse(localStorage.getItem("productsBasket")) || [];
-
+console.log(basket)
 function render(products) {
   card.innerHTML = "";
   for (let product of products) {
@@ -36,11 +36,13 @@ function render(products) {
     card.insertAdjacentHTML("beforeend", html);
   }
   const btnBasket = document.querySelectorAll(".card__btn");
-  btnBasket.forEach((buttonAdd) => {
+  const btnBlock = document.querySelectorAll(".card__btn-basket");
+  btnBasket.forEach((buttonAdd, index) => {
     buttonAdd.addEventListener("click", () => {
-      const btnBlock = document.querySelector(".card__btn-basket");
-      btnBlock.classList.remove('hidden')
-      buttonAdd.innerHTML = 'Товар в корзине'
+      console.log(index)
+      btnBlock[index].classList.remove("hidden");
+      buttonAdd.innerHTML = "Товар в корзине";
+
       let findProduct = products.find((product) => {
         return product.id === Number(buttonAdd.id);
       });
@@ -54,7 +56,6 @@ function render(products) {
         basket.push(findProduct);
       }
       localStorage.setItem("productsBasket", JSON.stringify(basket));
-      
     });
   });
 }
@@ -99,10 +100,6 @@ selectSort.addEventListener("change", () => {
   filterProducts();
 });
 
-// selectBrand.addEventListener("change", () => {
-//   filterProducts();
-// });
-
 inputSale.addEventListener("change", () => {
   filterProducts();
 });
@@ -125,9 +122,17 @@ function filterProducts() {
       .includes(inputSearch.value.toLowerCase());
   });
 
-  // newProducts = newProducts.filter((product) => {
-  //   return product.brand.toLowerCase() === selectBrand.value;
-  // });
+  const checkBrands = [];
+  checkboxBrand.forEach((Brand) => {
+    if (Brand.checked === true) {
+      checkBrands.push(Brand.value);
+    }
+  });
+  if (checkBrands.length != 0) {
+    newProducts = newProducts.filter((product) => {
+      return checkBrands.includes(product.brand);
+    });
+  }
 
   if (inputSale.checked === true) {
     newProducts = newProducts.filter((el) => {
@@ -149,14 +154,20 @@ function filterProducts() {
 
   render(newProducts);
 }
+// const checkBrands = [];
 
 checkboxBrand.forEach((checkbox) => {
-  checkbox.addEventListener('change', () => {
-    let newProducts = [...products]
-    newProducts = newProducts.filter((product) => {
-      return product.brand === checkbox.value
-    })
-    console.log(newProducts)
-    console.log(checkbox.value)
-  })
-})
+  checkbox.addEventListener("change", () => {
+    filterProducts();
+    // if(checkbox.checked === true){
+    //   checkBrands.push(checkbox.value)
+    // }
+    // console.log(checkBrands)
+    // let newProducts = [...products]
+    // newProducts = newProducts.filter((product) => {
+    //   return product.brand === checkbox.value
+    // })
+    // console.log(newProducts)
+    // console.log(checkbox.value)
+  });
+});
