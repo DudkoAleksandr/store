@@ -11,11 +11,13 @@ const filterWrap = document.querySelector(".filter");
 const checkboxBrand = document.querySelectorAll(
   ".checkbox__search-brand input",
 );
+const checkboxColor = document.querySelectorAll(".checkbox__color input");
 
 import { products } from "./data.js";
 
 const basket = JSON.parse(localStorage.getItem("productsBasket")) || [];
-console.log(basket)
+let countProduct = 0;
+
 function render(products) {
   card.innerHTML = "";
   for (let product of products) {
@@ -25,11 +27,12 @@ function render(products) {
     <img class="card__img" src="${product.image}" alt="">
     </div>
     <h1 class="card__title">${product.title}</h1>
+    <p class="card__price">Цвет: ${product.color}</p>
     <p class="card__price">Цена: ${product.price}</p>
     <p class="card__rating">Рейтинг: ${product.rating}</p>
     <button id = "${product.id}" class="card__btn">Добавить в корзину</button>
     <div class="card__btn-basket hidden">
-    <button class="card__btn-basket-plus">+</button><p>0</p><button class="card__btn-basket-min">-</button>
+    <button class="card__btn-basket-plus">+</button><p id = "${product.id}"class="basket__count">0</p><button class="card__btn-basket-min">-</button>
     </div>
     </div>
 `;
@@ -37,9 +40,9 @@ function render(products) {
   }
   const btnBasket = document.querySelectorAll(".card__btn");
   const btnBlock = document.querySelectorAll(".card__btn-basket");
+  const priceCard = document.querySelectorAll(".basket__count");
   btnBasket.forEach((buttonAdd, index) => {
     buttonAdd.addEventListener("click", () => {
-      console.log(index)
       btnBlock[index].classList.remove("hidden");
       buttonAdd.innerHTML = "Товар в корзине";
 
@@ -56,6 +59,23 @@ function render(products) {
         basket.push(findProduct);
       }
       localStorage.setItem("productsBasket", JSON.stringify(basket));
+
+      const basketCount = basket.find((product) => {
+        if (buttonAdd.id == product.id) {
+          return product.count;
+        }
+      });
+      console.log(basketCount.count, basketCount.id);
+
+      // priceCard.innerHTML = basketCount.count
+      // console.log(priceCard)
+      for (let cardPriceCount of priceCard) {
+          // console.log(Number(cardPriceCount.id));
+          // console.log(product.id);
+          if(Number(cardPriceCount.id) == basketCount.id){
+            cardPriceCount.innerHTML = basketCount.count;
+          }
+      }
     });
   });
 }
@@ -134,6 +154,19 @@ function filterProducts() {
     });
   }
 
+  const checkColor = [];
+  checkboxColor.forEach((color) => {
+    if (color.checked === true) {
+      checkColor.push(color.value);
+    }
+  });
+  if (checkColor != 0) {
+    newProducts = newProducts.filter((product) => {
+      return checkColor.includes(product.color);
+    });
+  }
+  console.log(checkColor);
+
   if (inputSale.checked === true) {
     newProducts = newProducts.filter((el) => {
       return el.sale === true;
@@ -154,20 +187,15 @@ function filterProducts() {
 
   render(newProducts);
 }
-// const checkBrands = [];
 
 checkboxBrand.forEach((checkbox) => {
   checkbox.addEventListener("change", () => {
     filterProducts();
-    // if(checkbox.checked === true){
-    //   checkBrands.push(checkbox.value)
-    // }
-    // console.log(checkBrands)
-    // let newProducts = [...products]
-    // newProducts = newProducts.filter((product) => {
-    //   return product.brand === checkbox.value
-    // })
-    // console.log(newProducts)
-    // console.log(checkbox.value)
+  });
+});
+
+checkboxColor.forEach((checkbox) => {
+  checkbox.addEventListener("change", () => {
+    filterProducts();
   });
 });

@@ -45,7 +45,7 @@ a {
   width: 200px;
   margin-top: 10px;
 }
-.checkbox__search-brand{
+.checkbox__style{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   margin-top: 10px;
